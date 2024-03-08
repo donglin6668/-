@@ -1,0 +1,47 @@
+import datetime
+
+def add_todo():
+    todo = input("Enter the todo item: ")
+    date_str = input("Enter the due date (YYYY-MM-DD): ")
+
+    try:
+        due_date = datetime.datetime.strptime(date_str, "%Y-%m-%d").date()
+        todo_item = {"todo": todo, "due_date": due_date}
+        todos.append(todo_item)
+        print("Todo item added successfully.")
+    except ValueError:
+        print("Invalid date format. Todo item not added.")
+
+def print_todos():
+    if not todos:
+        print("No todo items.")
+    else:
+        print("Todo items:")
+        for index, todo_item in enumerate(todos, start=1):
+            todo = todo_item["todo"]
+            due_date = todo_item["due_date"]
+            print(f"{index}. {todo} (Due Date: {due_date})")
+
+def main():
+    global todos
+    todos = []
+
+    while True:
+        print("\nTodo App")
+        print("1. Add Todo")
+        print("2. Print Todos")
+        print("3. Exit")
+
+        choice = input("Enter your choice: ")
+
+        if choice == "1":
+            add_todo()
+        elif choice == "2":
+            print_todos()
+        elif choice == "3":
+            break
+        else:
+            print("Invalid choice. Please try again.")
+
+if __name__ == "__main__":
+    main()
